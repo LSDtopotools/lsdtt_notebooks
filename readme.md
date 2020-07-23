@@ -26,20 +26,42 @@ _Preamble_: Once you have downloaded docker, you can control how much memory you
 ```console
 $ docker pull lsdtopotools/lsdtt_pytools_docker
 ```
-2. Now you need to run the container:
+
+2. You need to open your docker container with a port: this port will host the [jupyter notebooks](https://jupyter.org/):
+
 ```console
-$ docker run -it -v C:\LSDTopoTools:/LSDTopoTools lsdtopotools/lsdtt_pytools_docker
+# docker run -it -v C:\LSDTopoTools:/LSDTopoTools -p 8888:8888 lsdtopotools/lsdtt_pytools_docker
 ```
+
   1. The `-it` means "interactive".
   2. The `-v` stands for "volume" and in practice it links the files in the docker container with files in your host operating system.
-  3. After the `-v` you need to tell docker where the directories are on both the host operating system (in this case `C:\LSDTopoTools`) and the container (in this case `/LSDTopoTools`). These are separated by a colon (`:`).
-3. Once you do this you will get a `#` symbol showing that you are inside the container. You can now do *LSDTopoTools* stuff.
+  3. After the `-v` you need to tell docker where the directories are on both the host operating system (in this case `C:\LSDTopoTools`) and the container (in this case `/LSDTopoTools`). These are separated by a colon (`:`). Note that you should update the `C:\LSDTopoTools` to reflect the directory structure on your local machine.
+  4. the `-p` stand for port. `8888:8888` is the default.
+  5. Once you do this you will get a `#` symbol showing that you are inside the container. You can now do *LSDTopoTools* stuff.
 
+3. We include a script to install some local python packages. To run, use:
+
+```console
+# install_lsdtt_python_packages.sh
+```
+  1. This will install `lsdttparamselector`, `lsdttviztools`, and `lsdtopytools`.
+
+4. Then, inside the container, start the notebook:
+
+```console
+# jupyter notebook --ip 0.0.0.0 --port 8888 --no-browser --allow-root
+```
+
+5. When you run this command, it will give you some html addresses. *These will not work from your host computer!!* But these addresses do show you a `token`: you can see it in the address after `token=`.
+  1. Instead, go into a browser on your host computer and go to http://localhost:8888/
+  2. Then, in the password box, insert the `token` that was shown in the docker container.
+  3. Yay, you can now start working with notebooks, using all the fun geospatial stuff that is in this container!
 
 
 #### Running command line tools
 
-1. Command line tools are ready for use immediately. Try `# lsdtt-basic-metrics`
+1. The package `lsdttparamselector` allows you to select parameters for the `lsdtopotools` command line tools. Thes can be run from an ipython notebook using `lsdttviztools`. But you can also run the command line tools straight from a terminal window.
+1. The command line tools are already install in the docker container. Try `# lsdtt-basic-metrics`
 2. To see what is possible, check out the following documentation:
   * Note: for the below instructions, you will need the example datasets. Grab these with `# sh Get_LSDTT_example_data.sh`
   * https://lsdtopotools.github.io/LSDTT_documentation/LSDTT_basic_usage.html
@@ -57,25 +79,7 @@ $ docker run -it -v C:\LSDTopoTools:/LSDTopoTools lsdtopotools/lsdtt_pytools_doc
 
 #### Running a jupyter notebook from this container
 
-1. The lsdpytools container can also serve as a host for [jupyter notebooks](https://jupyter.org/)
-2. You need to open your docker container with a port:
 
-```console
-# docker run -it -v C:\LSDTopoTools:/LSDTopoTools -p 8888:8888 lsdtopotools/lsdtt_pytools_docker
-```
-
-  * Note that you should update the `C:\LSDTopoTools` to reflect the directory structure on your locak machine.
-
-3. Then, inside the container, start the notebook:
-
-```console
-# jupyter notebook --ip 0.0.0.0 --port 8888 --no-browser --allow-root
-```
-
-4. When you run this command, it will give you some html addresses. *These will not work from your host computer!!* But these addresses do show you a `token`: you can see it in the address after `token=`.
-  1. Instead, go into a browser on your host computer and go to http://localhost:8888/
-  2. Then, in the password box, insert the `token` that was shown in the docker container.
-  3. Yay, you can now start working with notebooks, using all the fun geospatial stuff that is in this container!
 
 ### Installing in a conda environment
 
