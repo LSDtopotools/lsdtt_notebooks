@@ -2,20 +2,20 @@
 
 ## Getting started
 
-The easiset way to get started is to use our Docker container, which has everything pre-installed.
+The easiest way to get started is to use our [Docker](https://www.docker.com/) container, which has everything pre-installed.
 
-If you don't have docker, or don't want it, the next best way to install things is through a conda environment.
+If you don't have Docker, or don't want it, the next best way to install things is through a [conda environment](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html).
 
-Both the docker approach and the conda appraoch are problematic for Windows: docker installation on windows is not so easy (and impossible without administrator privileges) and conda will work on windows but the lsdtopotools command line tools do not have a working windows version. We highly reccomend you use a linux emulation system if you are using Windows (Windows Linux Subsystem, for example).
+Both the Docker approach and the conda approach are problematic for Windows: Docker installation on Windows is not so easy (and impossible without administrator privileges) and conda will work on windows but the lsdtopotools command line tools do not have a working windows version. We highly recommend you use a Linux emulation system if you are using Windows ([Windows Linux Subsystem](https://docs.microsoft.com/en-us/windows/wsl/install-win10), for example).
 
-### The docker container
+### The Docker container
 
 These instructions are for using our [Docker container](https://hub.docker.com/repository/docker/lsdtopotools/lsdtt_pytools_docker). You can look at the readme there to see instructions for installing Docker.
 
 #### Part 1: set up an LSDTopoTools directory on your host machine
 
-1. You will want to be able to see *LSDTopoTools* output on your host operating system, so we will need to create a directory for hosting your *LSDTopoTools* data, code, and scripts.
-2. For the purposes of this tutorial, I will assume you are using windows and that you have made a directory `C:\LSDTopoTools`.
+1. You will want to be able to see *LSDTopoTools* output on your host operating system, so you will need to create a directory for hosting your *LSDTopoTools* data, code, and scripts.
+2. For the purposes of this tutorial, I will assume you are using Windows and that you have made a directory `C:\LSDTopoTools`.
   * You can put this directory anywhere you want as long as you remember where it is. You don't need to put anything in this directory yet.
 
 #### Part 2: Download and run the container
@@ -60,7 +60,7 @@ $ docker pull lsdtopotools/lsdtt_pytools_docker
 
 #### Running command line tools
 
-1. The package `lsdttparamselector` allows you to select parameters for the `lsdtopotools` command line tools. Thes can be run from an ipython notebook using `lsdttviztools`. But you can also run the command line tools straight from a terminal window.
+1. The package `lsdttparamselector` allows you to select parameters for the `lsdtopotools` command line tools. These can be run from an ipython notebook using `lsdttviztools`. But you can also run the command line tools straight from a terminal window.
 1. The command line tools are already install in the docker container. Try `# lsdtt-basic-metrics`
 2. To see what is possible, check out the following documentation:
   * Note: for the below instructions, you will need the example datasets. Grab these with `# sh Get_LSDTT_example_data.sh`
@@ -75,10 +75,13 @@ $ docker pull lsdtopotools/lsdtt_pytools_docker
 ```console
 # install_lsdtt_python_packages.sh
 ```
-2. This will install `lsdttparamselector`, `lsdttviztools`, and `lsdtopytools`.
-
-#### Running a jupyter notebook from this container
-
+2. This will install `lsdttparamselector`, `lsdttviztools`, and `lsdtopytools` from local repositories that the script downloads. This means that you will get the latest version of the tools.
+  * Alternatively, you can install some of the tools with the latest tagged version:
+  ```console
+  $ pip install lsdttviztools
+  $ pip install lsdttparamselector
+  ```
+  These tools will then be installed via the `pypi` repository.
 
 
 ### Installing in a conda environment
@@ -112,4 +115,4 @@ $ conda install -y gdal rasterio geopandas matplotlib numpy scipy pytables numba
 
 ## What is in this repository
 
-The notebooks in this repository work with various components of lsdtopotools, so check the readme in each subdirectory. The subdirectories are named in a way that hopefully explains their contents.
+The notebooks in this repository work with various components of lsdtopotools, so check the readme in each subdirectory, or if that doesn't exist, just open the notebook. The subdirectories are named in a way that hopefully explains their contents.
