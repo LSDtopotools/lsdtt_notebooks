@@ -1,16 +1,16 @@
 # `lsdtopytools`: Cross-platform `python` portage of LSDTopoTools
 
-`lsdtopytools` is a `python` package provinding a `python` interface to LSDTopoTools (_i.e_ without the need of running `c++` tools separately, or with `subprocess`). It links behind the scenes and in memory the `c++` codes with `xtensor` and `pybind11` to take full advantage of `c++` speed with `python` flexibility. LSDTopoTools is a topographic analysis research software with a focus of fluvial and hillslope geomorphology. `lsdtopytools` is cross-platform and available on conda-forge (= easy to install). 
+`lsdtopytools` is a `python` package providing a `python` interface to LSDTopoTools (_i.e_ without the need of running `c++` tools separately, or with `subprocess`). It links behind the scenes and in memory the `c++` codes with `xtensor` and `pybind11` to take full advantage of `c++` speed with `python` flexibility. LSDTopoTools is a topographic analysis research software with a focus of fluvial and hillslope geomorphology. `lsdtopytools` is cross-platform and available on conda-forge (= easy to install). 
 
 ## What does this sub-repository contains?
 
-When it comes to using scientific softwares, I believe in a practical approach. In this readme you will find the installation instructions. Use Quickstart if you are comfortable with the principle of `python`, `conda` and `jupyter`. The rest mostly explains these, and may detail quickly what are each notebooks.
+When it comes to using scientific softwares, I believe in a practical approach. In this readme you will find the installation instructions. Use Quick-start if you are comfortable with the principle of `python`, `conda` and `jupyter`. The rest mostly explains these, and may detail quickly what are each notebooks.
 
-The rest of the repo contains practical examples using `lsdtopytools` to produce topographic analysis.
+The rest of the repository contains practical examples using `lsdtopytools` to produce topographic analysis.
 
 # Quickstart
 
-This Quick start section assumes you are confortable the basics of `python`, `conda` and `jupyter`. See appendices first if you need introduction to these tools.
+This Quick start section assumes you are comfortable the basics of `python`, `conda` and `jupyter`. See appendices first if you need introduction to these tools.
 
 - Install anaconda environment manager (miniconda is enough) for python 3
 
@@ -29,11 +29,11 @@ And you are good to go. This repository contains a number of notebooks describin
 
 # Appendix A: What is conda and why
 
-The first thing to have in mind to understand the need of `conda` is the concept of _python environment_. One could describe `python` as a _glue_ language: it is an interpreted language, where each line of code is actually calling already compiled routines on C/Fortran/C++/... behind the scene from many different packages unified within its simple syntax. Basically, if you need any numerical thing to be done, it has probably already been coded by someone and you can just use it with `python` without reinventing the wheel. However this raises a problem: your `python` interpreter needs to know where to find this tools you want to use. Moreover, your tools will rely itself on other packages and python needs to find them as well. This is a _python environment_: a box inside your computer where all the different codes you want to use are located and can find each otehr to function properly. 
+The first thing to have in mind to understand the need of `conda` is the concept of _python environment_. One could describe `python` as a _glue_ language: it is an interpreted language, where each line of code is actually calling already compiled routines on C/Fortran/C++/... behind the scene from many different packages unified within its simple syntax. Basically, if you need any numerical thing to be done, it has probably already been coded by someone and you can just use it with `python` without reinventing the wheel. However this raises a problem: your `python` interpreter needs to know where to find this tools you want to use. Moreover, your tools will rely itself on other packages and python needs to find them as well. This is a _python environment_: a box inside your computer where all the different codes you want to use are located and can find each other to function properly. 
 
-As a comparison, softwares like QGIS, ArcGIS or MATLAB comes with their own boxes, more or less rigid and can function on their own after installation. `python` is open-source: you can always expand your box with content from anyone in the community, or with a package realesed by a company or whatever. However this also makes the management of this box tricky: there can be dependencies conflict, version issues, some code badly maintain, ... 
+As a comparison, softwares like QGIS, ArcGIS or MATLAB comes with their own boxes, more or less rigid and can function on their own after installation. `python` is open-source: you can always expand your box with content from anyone in the community, or with a package released by a company or whatever. However this also makes the management of this box tricky: there can be dependencies conflict, version issues, some code badly maintain, ... 
 
-That's where `conda` comes being very handy: it automates and manages all of these things for you. It creates box(es) within your computer (not physical boxes eh) and you can install whatever you need within these boxes. It manages conflict, proper installation, and allow scientists install codes easily without the need of computer science knowledge. It also helps scientists develloping codes, _e.g_ for `lsdtopytools`: we do not need to compile our code for every types of computers, `conda-forge` does it for us so we can distribute our code to anyone who needs it.
+That's where `conda` comes being very handy: it automates and manages all of these things for you. It creates box(es) within your computer (not physical boxes eh) and you can install whatever you need within these boxes. It manages conflict, proper installation, and allow scientists install codes easily without the need of computer science knowledge. It also helps scientists developing codes, _e.g_ for `lsdtopytools`: we do not need to compile our code for every types of computers, `conda-forge` does it for us so we can distribute our code to anyone who needs it.
 
 ## Installing conda
 
@@ -60,7 +60,7 @@ Multiple packages can be installed at once, for example, if I want `numpy` and `
 
 Dependencies are managed automatically behind the scenes and will be installed if needed.
 
-**Tips to speed up things**: You will realise that if you install a new package in an already busy environment, it takes time. [Quantstack](https://quantstack.net/) is developping a drop-in replacement speeding up the process (drastically). You can install it with conda: `conda install -c conda-forge mamba` and simply replace `conda` with `mamba` when **installing** a package (this is just for installation, not environment management). E.g `mamba install -c conda-forge lsdtopytools`
+**Tips to speed up things**: You will realise that if you install a new package in an already busy environment, it takes time. [Quantstack](https://quantstack.net/) is developing a drop-in replacement speeding up the process (drastically). You can install it with conda: `conda install -c conda-forge mamba` and simply replace `conda` with `mamba` when **installing** a package (this is just for installation, not environment management). E.g `mamba install -c conda-forge lsdtopytools`
 
 ## Capricious dependencies
 
@@ -71,7 +71,7 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-What does it do: it makes sure it prioritises the packages from `conda-forge` before considering the official `anaconda` channel (the default one). Ot makes sure that all the installations come from the same source.
+What does it do: it makes sure it priorities the packages from `conda-forge` before considering the official `anaconda` channel (the default one). It makes sure that all the installations come from the same source.
 
 ## Unsolvable dependencies
 
@@ -94,6 +94,13 @@ If the package has a `setup.py` file, it can be installed. The cleanest way is t
 - in the terminal, with your environment activated, run `pip install .`
 
 - **IF IT FAILS** `python setup.py bdist_wheel` it will create a `dist` folder with a `XXX.whl` file which can be installed with `pip install dist/XXX.whl` (replace with relevant name of course, also note that I did not cd to the dist directory).
+
+### Case 3: None of the above
+
+It is then shared as one or several python script. To use it, you need to make sure all the dependdencies (i.e everything that is `import`ed in the script) are installed. Then you can put the script in the very same folder than the code you are currently using, and import the script in your code. If short, you can alternatively use a good old copy-pasting.
+
+
+# Appendix B: Jupyter lab
 
 
 
