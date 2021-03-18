@@ -74,7 +74,7 @@ $ docker pull lsdtopotools/lsdtt_pytools_docker
 ```console
 # install_lsdtt_python_packages.sh
 ```
-2. This will install `lsdttparamselector`, `lsdttviztools`, and `lsdtopytools` from local repositories that the script downloads. This means that you will get the latest version of the tools.
+2. This will install `lsdttparamselector`, `lsdviztools`, and `lsdtopytools` from local repositories that the script downloads. This means that you will get the latest version of the tools.
   * Alternatively, you can install some of the tools with the latest tagged version:
   ```console
   $ pip install lsdviztools
