@@ -2,11 +2,53 @@
 
 ## Getting started
 
-The easiest way to get started is to use our [Docker](https://www.docker.com/) container, which has everything pre-installed.
+The easiest way to get started is to use our [Docker](https://www.docker.com/) container, which has everything pre-installed. Instructions for that are below. 
 
-If you don't have Docker, or don't want it, the next best way to install things is through a [conda environment](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html).
+If you don't have Docker, or don't want it, the next best way to install things is through a [conda environment](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html). However, this works in MacOS or Linux, but not windows. If you are in windows you will want to run a Windows Linux Subsystem instance. But if you are going to do that yo might as well use Docker. 
 
-Both the Docker approach and the conda approach are problematic for Windows: Docker installation on Windows is not so easy (and impossible without administrator privileges) and conda will work on windows but the lsdtopotools command line tools do not have a working windows version. We highly recommend you use a Linux emulation system if you are using Windows ([Windows Linux Subsystem](https://docs.microsoft.com/en-us/windows/wsl/install-win10), for example).
+Finally, you can just run the code in Google Colab or Microsoft Planetary Computer. 
+
+### Google colab
+
+1. Start Google Colab session. 
++
+2. Install `lsdviztools` (and dependencies) using `pip`
++
+```console
+!pip install lsdviztools &> /dev/null
+```
++
+3. Install condacolab (which gives you the package manager `mamba`):
++
+```console
+!pip install -q condacolab
+import condacolab
+condacolab.install()
+```
++
+4. Install `lsdtopotools`:
++
+```console
+!mamba install -y lsdtopotools &> /dev/null
+```
+5. That process should take less than 2 minuts and you are ready to go. 
+
+### Microsift Planetary Computer
+
+1. Wait a long time for MPC to give you a server. 
++
+2. Install `lsdviztools` (and dependencies) using `pip`
++
+```console
+!pip install lsdviztools &> /dev/null
+```
++
+3. Install `lsdtopotools` (this seems to take a lot longer on MPC than on google colab):
++
+```console
+!mamba install -y lsdtopotools &> /dev/null
+```
+4. You should be ready to go. MPC takes longer to spin up. But it has ~32 GB of memory vs ~ 12GB on Google Colab. 
 
 ### The Docker container
 
@@ -20,7 +62,14 @@ These instructions are for using our [Docker container](https://hub.docker.com/r
 
 #### Part 2: Download and run the container
 
-_Preamble_: Once you have downloaded docker, you can control how much memory you give the docker containers. The default is 3Gb. If you have even moderate sized DEM data, this will not be enough. You can go into the docker settings (varies by operating system, use a search engine to figure out where they are) and increase the memory.
+_Preamble_: The new versions of Docker desktop use winsows linux subsystem to manage memory. The default is to use up all your memory, which is not ideal. To stop this you need to make a little file, called `.wsclonfig`, and put it in your user directory (mine is `C:\Users\smudd`). The file looks like this:
+```
+[wsl2]
+memory=6GB   # Limits VM memory in WSL 2 up to 3GB
+processors=1 # Makes the WSL 2 VM use two virtual processors
+```
++
+you should adjust the memory accordingly. Now, we can run the container. 
 
 1. To get the container, go into a terminal (MacOS or Linux) or Powershell window (Windows) that has docker enabled and run:
 ```console
