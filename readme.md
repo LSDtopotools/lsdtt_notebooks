@@ -2,52 +2,56 @@
 
 ## Getting started
 
-The easiest way to get started is to use our [Docker](https://www.docker.com/) container, which has everything pre-installed. Instructions for that are below. 
+`lsdtopotools` has two components: a command line tool that has very few dependencies, and a python wrapper. 
 
-If you don't have Docker, or don't want it, the next best way to install things is through a [conda environment](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html). However, this works in MacOS or Linux, but not windows. If you are in windows you will want to run a Windows Linux Subsystem instance. But if you are going to do that yo might as well use Docker. 
+If you work in linux the command line tool is very stable. You can run it on a rasberry pi if you want. 
 
-Finally, you can just run the code in Google Colab or Microsoft Planetary Computer. 
+The python tools (and geospatial python in general) are not that stable because the packages `gdal` and `proj` are constantly breaking every time some core python module is updated (and that happens a lot). 
+
+If you work in geospatial python and keep your environment maintained so `gdal` is working, then installing `lsdtopotools` and `lsdviztools` in your environment will be a breeze. 
+
+If you do not do that, I suggest either our Docker container or use on Google Colab. The latter has the same problem of `gdal` breaking all the time, but the author of the readme spends 4 hours fixing it every 6 months, so you don't have to. 
+
+### If you use conda/mamba (for WSL, Linux, MacOS)
+
+I'm going to use `mamba` for this since it is faster than `conda`.
+
+1. Make an environment
+
+2. `mamba install lsdtopotools`
+
+3. `pip install lsdviztools`
+
+### If you are in Linux
+
+```console
+$ wget https://pkgs.geos.ed.ac.uk/geos-jammy/pool/world/l/lsdtopotools2/lsdtopotools2_0.9-1geos~22.04.1_amd64.deb
+$ sudo apt install ./lsdtopotools2_0.9-1geos~22.04.1_amd64.deb
+$ pip install lsdviztools
+```
 
 ### Google colab
 
-1. Start Google Colab session. 
-+
-2. Install `lsdviztools` (and dependencies) using `pip`
-+
+Go into the `lsdtopotools` directory and use the button at the top to open one of the many example notebooks in Google colab. 
+
+If you really want to  bootstrap and analysis you need the following cells at the top:
+
 ```console
-!pip install lsdviztools &> /dev/null
+!wget https://pkgs.geos.ed.ac.uk/geos-jammy/pool/world/l/lsdtopotools2/lsdtopotools2_0.9-1geos~22.04.1_amd64.deb  &> /dev/null
+!apt install ./lsdtopotools2_0.9-1geos~22.04.1_amd64.deb  &> /dev/null
 ```
-+
-3. Install condacolab (which gives you the package manager `mamba`):
-+
+
 ```console
-!pip install -q condacolab
-import condacolab
-condacolab.install()
+!pip install lsdviztools  &> /dev/null
 ```
-+
-4. Install `lsdtopotools`:
-+
-```console
-!mamba install -y lsdtopotools &> /dev/null
-```
-5. That process should take less than 2 minuts and you are ready to go. 
+
 
 ### Microsift Planetary Computer
 
 1. Wait a long time for MPC to give you a server. 
-+
-2. Install `lsdviztools` (and dependencies) using `pip`
-+
-```console
-!pip install lsdviztools &> /dev/null
-```
-+
-3. Install `lsdtopotools` (this seems to take a lot longer on MPC than on google colab):
-+
-```console
-!mamba install -y lsdtopotools &> /dev/null
-```
+2. `!pip install lsdviztools &> /dev/null`
+3. `!mamba install -y lsdtopotools &> /dev/null`
+4. I do not know why but this take a very long time. 
 4. You should be ready to go. MPC takes longer to spin up. But it has ~32 GB of memory vs ~ 12GB on Google Colab. 
 
 ### The Docker container
@@ -106,66 +110,17 @@ $ docker pull lsdtopotools/lsdtt_pytools_docker
   3. Yay, you can now start working with notebooks, using all the fun geospatial stuff that is in this container!
 
 
-#### Running command line tools
+## Running command line tools
 
-1. The package `lsdttparamselector` allows you to select parameters for the `lsdtopotools` command line tools. These can be run from an ipython notebook using `lsdviztools`. But you can also run the command line tools straight from a terminal window.
-1. The command line tools are already install in the docker container. Try `# lsdtt-basic-metrics`
-2. To see what is possible, check out the following documentation:
-  * Note: for the below instructions, you will need the example datasets. Grab these with `# sh Get_LSDTT_example_data.sh`
-  * https://lsdtopotools.github.io/LSDTT_documentation/LSDTT_basic_usage.html
-  * https://lsdtopotools.github.io/LSDTT_documentation/LSDTT_channel_extraction.html
-  * https://lsdtopotools.github.io/LSDTT_documentation/LSDTT_chi_analysis.html
+Once you install `lsdtopotools` you will have access to the command line tools. 
 
-#### Installing local python packages
-
-1. We include a script to install some local python packages. To run, use:
+Pick one of them (`lsdtt-basic-metrics`, `lsdtt-chi-mapping`, `lsdtt-cosmo-tool`, there are a few others), and fun it with a `-h` flag. For example:
 
 ```console
-# install_lsdtt_python_packages.sh
-```
-2. This will install `lsdttparamselector`, `lsdviztools`, and `lsdtopytools` from local repositories that the script downloads. This means that you will get the latest version of the tools.
-  * Alternatively, you can install some of the tools with the latest tagged version:
-  ```console
-  $ pip install lsdviztools
-  $ pip install lsdttparamselector
-  ```
-  These tools will then be installed via the `pypi` repository.
-
-
-### Installing in a conda environment
-
-1. Install [miniconda](https://docs.conda.io/en/latest/miniconda.html) on your computer (use the 64 bit python 3.7 version)
-
-2. Start with some conda housekeeping
-
-```console
-$ conda install -y -c conda-forge conda
-$ conda config --add channels conda-forge
-$ conda config --set channel_priority strict
+$ lsdtt-basic-metrics -h
 ```
 
-3. Make a conda environment. We'll used python 3.8
-
-```console
-$ conda create -n lsdtt python=3.8
-$ conda activate lsdtt
-```
-
-4. Then run these conda commands. Warning! This will take a **LONG** time.
-
-```console
-$ conda install -y lsdtopotools
-$ conda install -y git python=3
-$ conda install -y ipython ipykernel jupyter
-$ conda install -y conda-build
-$ conda install -y gdal rasterio geopandas matplotlib numpy scipy pytables numba feather-format pandas pip pybind11 xtensor xtensor-python fiona utm pyproj cartopy folium h5py lsdtopytools
-$ pip install lsdttparamselector lsdviztools
-```
-
-
-### Running the code on google colab
-
-You can set up the tools in google colab as well. Please see the `lsdtopotools_on_colab.ipynb` file in this repository.
+You will get both a .`csv` and an `.html` with a list of the options. 
 
 ## What is in this repository
 
