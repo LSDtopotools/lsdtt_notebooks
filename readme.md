@@ -25,8 +25,8 @@ I'm going to use `mamba` for this since it is faster than `conda`.
 ### If you are in Linux
 
 ```console
-$ wget https://pkgs.geos.ed.ac.uk/geos-jammy/pool/world/l/lsdtopotools2/lsdtopotools2_0.9-1geos~22.04.1_amd64.deb
-$ sudo apt install ./lsdtopotools2_0.9-1geos~22.04.1_amd64.deb
+$ wget https://www.geos.ed.ac.uk/~smudd/lsdtt_dev_ubuntu/lsdtopotools_0.10~d1-1_amd64.deb
+$ sudo apt install ./lsdtopotools_0.10~d1-1_amd64.deb
 $ pip install lsdviztools
 ```
 
@@ -37,8 +37,8 @@ Go into the `lsdtopotools` directory and use the button at the top to open one o
 If you really want to  bootstrap and analysis you need the following cells at the top:
 
 ```console
-!wget https://pkgs.geos.ed.ac.uk/geos-jammy/pool/world/l/lsdtopotools2/lsdtopotools2_0.9-1geos~22.04.1_amd64.deb  &> /dev/null
-!apt install ./lsdtopotools2_0.9-1geos~22.04.1_amd64.deb  &> /dev/null
+!wget https://www.geos.ed.ac.uk/~smudd/lsdtt_dev_ubuntu/lsdtopotools_0.10~d1-1_amd64.deb  &> /dev/null
+!apt install ./lsdtopotools_0.10~d1-1_amd64.deb  &> /dev/null
 ```
 
 ```console
